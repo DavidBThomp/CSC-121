@@ -19,9 +19,9 @@ int main()
 	cin >> velocity >> angle;
 
 	// processing
-	double feetps=velocity * 1.467;
+	double feetps=velocity * 1.4667;
 	double angles = angle*M_PI/180.0;
-	double distance=((feetps * feetps)/32) * sin(2*angles);
+	double distance=((feetps * feetps)/32.0) * sin(2.0*angles);
 
 	// output
 	cout << "Yikes will land " << distance << " feet from the cannon\n";
