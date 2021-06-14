@@ -28,6 +28,10 @@ int main()
 		double angles = angle*M_PI/180.0;
 		double distance=((feetps * feetps)/32.0) * sin(2.0*angles);
 
+		double timeAir=distance/(velocity * cos(angles));
+
+		double maxHeight=(velocity * sin(angles)) * timeAir / 2 - 0.5 * 32 ((timeAir / 2) * (timeAir / 2))
+
 		// output
 		cout << "Yikes will land " << distance << " feet from the cannon\n";
 		return 0;
