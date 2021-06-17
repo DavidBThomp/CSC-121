@@ -23,6 +23,7 @@ int main()
 	} else if (angle < 0 || angle > 90) {
 		cout << "The angle must be between 0 and 90 degrees.\n";
 	} else {
+
 		// processing
 		// Distance, Time, and Height
 		double feetps=velocity * 1.4667;
@@ -34,10 +35,9 @@ int main()
 
 		double maxHeight=(feetps * sin(angles)) * timeAir / 2.0 - 0.5 * 32.0 * pow(timeAir/2.0, 2.0);
 
+		// Processing and output for x,y cordinates
 		double timerSpace = timeAir/20.0;
 		double incTime = 0.0;
-
-		// Processing and output for x,y cordinates
 		while (incTime < timeAir)
 		{
 			double xCord=(feetps * cos(angles)) * incTime;
