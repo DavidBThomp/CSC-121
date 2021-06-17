@@ -26,15 +26,19 @@ int main()
 		// processing
 		double feetps=velocity * 1.4667;
 		double angles = angle*M_PI/180.0;
-		double distance=((feetps * feetps)/32.0) * sin(2.0*angles);
+		double distance=(pow(feetps,2)/32.0) * sin(2.0*angles);
 
-		double timeAir=distance/(velocity * cos(angles));
+		double timeAir=distance/(feetps * cos(angles));
 
-		double maxHeight=(velocity * sin(angles)) * timeAir / 2 - 0.5 * 32 ((timeAir / 2) * (timeAir / 2))
+		double maxHeight=(feetps * sin(angles)) * timeAir / 2.0 - 0.5 * 32.0 * pow(timeAir/2.0, 2.0);
 
 		// output
-		cout << "Yikes will land " << distance << " feet from the cannon\n";
+		cout << "Yikes will land " << distance << " feet from the cannon\nHe will spend " << timeAir << " seconds the air.\nHis maximum height wil be " << maxHeight << " feet.\n";
+		// Expected output for 100MPH 30 Deg:
+		// Distance = 578.815~       Height = 83.545~    Time = 4.56~   
+		// Based from own calculations and quick rechecks from https://amesweb.info/Physics/Trajectory-Calculator.aspx
 		return 0;
 	}
 
 }
+
