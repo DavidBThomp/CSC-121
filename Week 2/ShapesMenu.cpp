@@ -13,20 +13,24 @@ double cubeSurfaceArea(double cubeLen);
 double cubeVolume(double cubeLen);
 double sphereSurfaceArea(double sphereRad);
 double sphereVolume(double sphereRad);
+double rectSurfaceArea(double rectLen, double rectWid, double rectHei);
+double rectVolume(double rectLen, double rectWid, double rectHei);
+double cylinderSurfaceArea(double cylinderRad, double cylinderHei);
+double cylinderVolume(double cylinderRad, double cylinderHei);
 
 int main()
 {
 	int menuChoice=0;
 
 	// print menu
-	cout << "1. Cube\n2. Sphere\n3. Prism\n4. Cylinder\n5. Cone\n6. Quit\nEnter choice number: ";
+	cout << "1. Cube\n2. Sphere\n3. Rectangular Prism\n4. Cylinder\n5. Cone\n6. Quit\nEnter choice number: ";
 	cin >> menuChoice;
 
 	while (cin.fail()==1) {
 		cout << "\nError! Cannot read input\n";
 		cin.clear();
 		cin.ignore(INT_MAX,'\n');
-		cout << "1. Cube\n2. Sphere\n3. Prism\n4. Cylinder\n5. Cone\n6. Quit\nEnter choice number: ";
+		cout << "1. Cube\n2. Sphere\n3. Rectangular Prism\n4. Cylinder\n5. Cone\n6. Quit\nEnter choice number: ";
 		cin >> menuChoice;
 	}
 
@@ -53,7 +57,7 @@ int main()
 			cout << "Enter radius in inches:";
         	cin >> sphereRad;
 			while (sphereRad < 0.0) {
-				cout << "Error! Radius must be greater than 0.0\n";
+			 	cout << "Error! Radius must be greater than 0.0\n";
 				cout << "Enter radius in inches:";
         		cin >> sphereRad;
 			}
@@ -62,19 +66,49 @@ int main()
 			cout << "The surface area of the sphere is " << sphereSA << " inches.\nThe volume of the cube is " << sphereVOL << " cubic inches.\n";
 		}
 
+        // Menu choice for Rectangular Prism
+		if (menuChoice==3) {
+		    double rectLen=0.0, rectWid=0.0, rectHei=0.0;
+			cout << "Enter Length, Width, and Height in inches:";
+        	cin >> rectLen >> rectWid >> rectHei;
+			while (rectLen < 0.0 || rectWid < 0.0 || rectHei < 0.0) {
+			 	cout << "Error! All values must be greater than 0.0\n";
+				cout << "Enter Length, Width, and Height in inches::";
+        	    cin >> rectLen >> rectWid >> rectHei;
+			}
+			double rectSA=rectSurfaceArea(rectLen, rectWid, rectHei);
+            double rectVOL=rectVolume(rectLen, rectWid, rectHei);
+			cout << "The surface area of the rectangular prism is " << rectSA << " inches.\nThe volume of the rectangular prism is " << rectVOL << " cubic inches.\n";
+		}
+
+        // Menu choice for Cylinder
+		if (menuChoice==4) {
+		    double cylinderRad=0.0, cylinderHei=0.0;
+			cout << "Enter Cylinder Radius and Height in inches:";
+        	cin >> cylinderRad >> cylinderHei;
+			while (cylinderRad < 0.0 || cylinderHei < 0.0) {
+			 	cout << "Error! All values must be greater than 0.0\n";
+			    cout << "Enter Cylinder Radius and Height in inches:";
+        	    cin >> cylinderRad >> cylinderHei;
+			}
+			double cylinderSA=cylinderSurfaceArea(cylinderRad, cylinderHei);
+            double cylinderVOL=cylinderVolume(cylinderRad, cylinderHei);
+			cout << "The surface area of the cylinder is " << cylinderSA << " inches.\nThe volume of the cylinder is " << cylinderVOL << " cubic inches.\n";
+		}
+
 		if (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 4 && menuChoice != 5 && menuChoice != 6) {
 			cout << "\nError! Invalid menu choice\n";
 		}
             
 		// print menu
-		cout << "Please select another shape or quit program.\n1. Cube\n2. Sphere\n3. Prism\n4. Cylinder\n5. Cone\n6. Quit\nEnter choice number: ";
+		cout << "Please select another shape or quit program.\n1. Cube\n2. Sphere\n3. Rectangular Prism\n4. Cylinder\n5. Cone\n6. Quit\nEnter choice number: ";
 		cin >> menuChoice;
 
         while (cin.fail()==1) {
 		    cout << "\nError! Cannot read input\n";
 		    cin.clear();
 		    cin.ignore(INT_MAX,'\n');
-		    cout << "1. Cube\n2. Sphere\n3. Prism\n4. Cylinder\n5. Cone\n6. Quit\nEnter choice number: ";
+		    cout << "1. Cube\n2. Sphere\n3. Rectangular Prism\n4. Cylinder\n5. Cone\n6. Quit\nEnter choice number: ";
 		    cin >> menuChoice;
 	    }
 
@@ -102,4 +136,24 @@ double sphereSurfaceArea(double sphereRad) {
 double sphereVolume(double sphereRad) {
     double sphereVOL=(4.0/3.0)*M_PI*pow(sphereRad, 3.0);
     return sphereVOL;
+}
+
+double rectSurfaceArea(double rectLen, double rectWid, double rectHei) {
+    double rectSA=2*(rectWid*rectLen+rectHei*rectLen+rectHei*rectWid);
+    return rectSA;
+}
+
+double rectVolume(double rectLen, double rectWid, double rectHei) {
+    double rectVOL=rectLen*rectWid*rectHei;
+    return rectVOL;
+}
+
+double cylinderSurfaceArea(double cylinderRad, double cylinderHei) {
+    double cylinderSA=2.0*M_PI*cylinderRad*cylinderHei+2.0*M_PI*pow(cylinderRad,2.0);
+    return cylinderSA;
+}
+
+double cylinderVolume(double cylinderRad, double cylinderHei) {
+    double cylinderVOL=M_PI*pow(cylinderRad,2.0)*cylinderHei;
+    return cylinderVOL;
 }
