@@ -17,6 +17,8 @@ double rectSurfaceArea(double rectLen, double rectWid, double rectHei);
 double rectVolume(double rectLen, double rectWid, double rectHei);
 double cylinderSurfaceArea(double cylinderRad, double cylinderHei);
 double cylinderVolume(double cylinderRad, double cylinderHei);
+double coneSurfaceArea(double coneRad, double coneHei);
+double coneVolume(double coneRad, double coneHei);
 
 int main()
 {
@@ -96,6 +98,21 @@ int main()
 			cout << "The surface area of the cylinder is " << cylinderSA << " inches.\nThe volume of the cylinder is " << cylinderVOL << " cubic inches.\n";
 		}
 
+        // Menu choice for Cone
+		if (menuChoice==5) {
+		    double coneRad=0.0, coneHei=0.0;
+			cout << "Enter Cone Radius and Height in inches:";
+        	cin >> coneRad >> coneHei;
+			while (coneRad < 0.0 || coneHei < 0.0) {
+			 	cout << "Error! All values must be greater than 0.0\n";
+			    cout << "Enter Cone Radius and Height in inches:";
+        	    cin >> coneRad >> coneHei;
+			}
+			double coneSA=coneSurfaceArea(coneRad, coneHei);
+            double coneVOL=coneVolume(coneRad, coneHei);
+			cout << "The surface area of the cone is " << coneSA << " inches.\nThe volume of the cone is " << coneVOL << " cubic inches.\n";
+		}
+
 		if (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 4 && menuChoice != 5 && menuChoice != 6) {
 			cout << "\nError! Invalid menu choice\n";
 		}
@@ -156,4 +173,14 @@ double cylinderSurfaceArea(double cylinderRad, double cylinderHei) {
 double cylinderVolume(double cylinderRad, double cylinderHei) {
     double cylinderVOL=M_PI*pow(cylinderRad,2.0)*cylinderHei;
     return cylinderVOL;
+}
+
+double coneSurfaceArea(double coneRad, double coneHei) {
+    double coneSA=M_PI*coneRad*(coneRad+sqrt(pow(coneHei,2)+pow(coneRad,2)));
+    return coneSA;
+}
+
+double coneVolume(double coneRad, double coneHei) {
+    double coneVOL=M_PI*pow(coneRad,2)*(coneHei/3);
+    return coneVOL;
 }
