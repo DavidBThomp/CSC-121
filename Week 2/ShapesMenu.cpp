@@ -43,6 +43,13 @@ int main()
 		    double cubeLen=0.0;
 			cout << "Enter length of edge in inches:";
         	cin >> cubeLen;
+            while (cin.fail()==1) {
+		        cout << "\nError! Cannot read input\n";
+		        cin.clear();
+		        cin.ignore(INT_MAX,'\n');
+		        cout << "Enter length of edge in inches:";
+		        cin >> cubeLen;
+	        }
 			while (cubeLen < 0.0) {
 				cout << "Error! Length must be greater than 0.0\n";
 				cout << "Enter side in inches:";
@@ -58,6 +65,13 @@ int main()
 		    double sphereRad=0.0;
 			cout << "Enter radius in inches:";
         	cin >> sphereRad;
+            while (cin.fail()==1) {
+		        cout << "\nError! Cannot read input\n";
+		        cin.clear();
+		        cin.ignore(INT_MAX,'\n');
+		        cout << "Enter radius in inches:";
+		        cin >> sphereRad;
+	        }
 			while (sphereRad < 0.0) {
 			 	cout << "Error! Radius must be greater than 0.0\n";
 				cout << "Enter radius in inches:";
@@ -73,6 +87,13 @@ int main()
 		    double rectLen=0.0, rectWid=0.0, rectHei=0.0;
 			cout << "Enter Length, Width, and Height in inches:";
         	cin >> rectLen >> rectWid >> rectHei;
+            while (cin.fail()==1) {
+		        cout << "\nError! Cannot read input\n";
+		        cin.clear();
+		        cin.ignore(INT_MAX,'\n');
+		        cout << "Enter Length, Width, and Height in inches:";
+		        cin >>  rectLen >> rectWid >> rectHei;
+	        }
 			while (rectLen < 0.0 || rectWid < 0.0 || rectHei < 0.0) {
 			 	cout << "Error! All values must be greater than 0.0\n";
 				cout << "Enter Length, Width, and Height in inches::";
@@ -88,6 +109,13 @@ int main()
 		    double cylinderRad=0.0, cylinderHei=0.0;
 			cout << "Enter Cylinder Radius and Height in inches:";
         	cin >> cylinderRad >> cylinderHei;
+            while (cin.fail()==1) {
+		        cout << "\nError! Cannot read input\n";
+		        cin.clear();
+		        cin.ignore(INT_MAX,'\n');
+		        cout << "Enter Cylinder Radius and Height in inches:";
+		        cin >> cylinderRad >> cylinderHei;
+	        }
 			while (cylinderRad < 0.0 || cylinderHei < 0.0) {
 			 	cout << "Error! All values must be greater than 0.0\n";
 			    cout << "Enter Cylinder Radius and Height in inches:";
@@ -103,6 +131,13 @@ int main()
 		    double coneRad=0.0, coneHei=0.0;
 			cout << "Enter Cone Radius and Height in inches:";
         	cin >> coneRad >> coneHei;
+            while (cin.fail()==1) {
+		        cout << "\nError! Cannot read input\n";
+		        cin.clear();
+		        cin.ignore(INT_MAX,'\n');
+		        cout << "Enter Cone Radius and Height in inches:";
+		        cin >> coneRad >> coneHei;
+	        }
 			while (coneRad < 0.0 || coneHei < 0.0) {
 			 	cout << "Error! All values must be greater than 0.0\n";
 			    cout << "Enter Cone Radius and Height in inches:";
