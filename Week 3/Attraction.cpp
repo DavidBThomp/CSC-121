@@ -1,6 +1,6 @@
 /*
-* Menu and shapes Assignment
-* Allows selection of shape and calculation of surface area and volume
+* Attraction Assignment
+* Calculates distance and force of 2 spheres
 */
 
 #include <iostream>
@@ -12,8 +12,7 @@ using namespace std;
         
         
 int main() {
-    double sr1=0.0, sr2=0.0, sm1=0.0, sm2=0.0, distance=0.0;
-
+    double sr1=0.0, sr2=0.0, sm1=0.0, sm2=0.0, distance=0.0, grav=6.67408*pow(10.0,-11.0);
     // Get Sphere Information
     cout << "Enter sphere's radius and then sphere's masses in Meters and KGs(Sphere 1 Radius, Sphere 2 Radius, Sphere 1 Mass, Sphere 2 Radius):";
     cin >> sr1 >> sr2 >> sm1 >> sm2;
@@ -47,7 +46,18 @@ int main() {
     }
 
     // Calculations
-    // double cubeSA=cubeSurfaceArea(cubeLen);
-    // double cubeVOL=cubeVolume(cubeLen);
-    cout << "sr1, sr2, sm1, and sm2 are all respectively " << sr1 << sr2 << sm1 << sm2<< ".\nThe distance is " << distance << " meters.\n";
+    double force = (sm1*sm2/pow(distance,2.0)*grav);
+    double calcDistance = (distance+sr1+sr2);
+
+    // Processing and output distance and force
+    double distanceSpace = calcDistance/100.0;
+    double incDistance = 0.0;
+    while (incDistance < calcDistance)
+    {
+        double forceA = sm1*sm2/pow((incDistance-sr1-sr2),2.0)*grav;
+        cout << "Distance: "<< incDistance << " Meters   Force: " << forceA << " KGs\n";
+        incDistance= incDistance+distanceSpace;
+    }
+
+    cout << "The distance edge to edge is " << calcDistance << ".\nThe force is " << force << " KGs.\n";
 }
