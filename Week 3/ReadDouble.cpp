@@ -1,7 +1,11 @@
 /*
 * ReadDouble Assignment
 * Take User Input as a String and read input into valid number
-* 
+* First charcter can be +, -, or decimal
+* rest of char can be numeric, comma, or decimal
+* commas must be in proper location, before decimal, and seperating 3 digit groups
+* no commas after decimal point
+* only one decimal point
 */
 
 #include <iostream>
