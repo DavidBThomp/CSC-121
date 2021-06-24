@@ -1,9 +1,10 @@
 /*
 * ReadDouble Assignment
 * Take User Input as a String and read input into valid number
-* First charcter can be +, -, or decimal            DONE
-* rest of char can be numeric, comma, or decimal        DONE
-* commas must be in proper location, before decimal, and seperating 3 digit groups
+*
+* First charcter can be +, -, or decimal
+* rest of char can be numeric, comma, or decimal
+* commas must be in proper location, before decimal, and seperating 3 digit groups  
 * no commas after decimal point
 * only one decimal point
 */
@@ -20,10 +21,13 @@ using namespace std;
 void ReadChar(string &input) {
 
     bool isValid=true;
-    string convert;
-    
     isValid=true;
-    
+    string convert;
+    string commas;
+    long len=input.length();
+
+    long periodIndex = input.find(".");
+    periodIndex = periodIndex + 1;
 
     // Check that first input value is + - 0
     if (input[0]!='+' && input[0]!='-' && isdigit(input[0]) == 0) {
@@ -35,10 +39,9 @@ void ReadChar(string &input) {
     }
 
     // check that the remaining characters are numeric
-    long len=input.length();
     for (long index=1; index < len && isValid==true; index++) {
         if (input[index]==',' || input[index]=='.') {
-            ;  // do nothing if character is a ','
+            ; // Do nothing
         }
         else if (isdigit(input[index]) == 0){
             //if the value is not a number
@@ -51,18 +54,35 @@ void ReadChar(string &input) {
         }
     }
 
-    // Checks period Behavior
-    int periodIndex;
-    for (long index=1; index < len && isValid==true; index++) {
-        if (input[index]=='.') {
-            periodIndex = index;
+    // Check all points after period
+    string decimalEnd;
+    decimalEnd += ".";
+    for (periodIndex; periodIndex < len && isValid==true; periodIndex++) {
+        if (input[periodIndex]==',' || input[periodIndex]=='.') {
+            //if values after period are period or comma
+            cout << "\n" <<"Error! Only one period is valid, and no periods or commas can come after initial period.\n";
+            isValid=false;
         }
+
+        decimalEnd += input[periodIndex];
+
     }
-    cout << periodIndex;
+
+    // Adds Commas before period where needed
+    long commaDec = input.find(".");
+    commaDec = commaDec;
+    commas = input.substr(0,commaDec);
+    long commasLen=commas.length();
+
+    long n = commasLen - 3;
+    while (n > 0) {
+        commas.insert(n, ",");
+        n-=3;
+    }  
+
+    commas += decimalEnd;
     
-
-    cout << "The string input was " << input << endl;
-
+    cout << "The string input was " << commas << endl;
 
 }
 
