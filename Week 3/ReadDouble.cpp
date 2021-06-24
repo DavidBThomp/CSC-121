@@ -82,7 +82,7 @@ void ReadChar(string &input) {
 
     commas += decimalEnd;
     
-    cout << "The string input was " << commas << endl;
+    cout  << "The string input was " << commas << "\n\n";
 
 }
 
