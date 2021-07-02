@@ -81,7 +81,7 @@ double quadPositive(double a, double b, double c) {
     // Calculates positive Quadratic Formula
     // x1 = (-B + (B2 – 4AC)1/2 )  / 2A
 
-    double x1 = (-b + sqrt((pow(b,2.0)-4.0*a*c)))/2.0*a;
+    double x1 = (-b + sqrt((pow(b,2.0)-4.0*a*c)))/(2.0*a);
 
     return x1;
 
@@ -91,7 +91,7 @@ double quadNegative(double a, double b, double c) {
     // Calculates negative Quadratic Formula
     // x2 = (-B - (B2 – 4AC)1/2 )  / 2A
 
-    double x2 = (-b - sqrt((pow(b,2.0)-4.0*a*c)))/2.0*a;
+    double x2 = (-b - sqrt((pow(b,2.0)-4.0*a*c)))/(2.0*a);
 
     return x2;
 
