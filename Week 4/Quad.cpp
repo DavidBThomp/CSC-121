@@ -24,7 +24,8 @@ int main()
     do {
 
         try {
-            done=true;
+            done = true;
+
             // Get user input
             cout << "Perform the Quadratic formula.\nPlease input A,B, and C in equation. (Ax^2 + Bx + C = 0):";
             cin >> a >> b >> c;
@@ -51,6 +52,8 @@ int main()
             double x1 = quadPositive(a,b,c);
             double x2 = quadNegative(a,b,c);
 
+            // Output equation results
+            cout << "X1 (positive equation) is equal to " << x1 << "\nX2 (negative equation) is equal to " << x2 << "\nX = " << x1 << ", " << x2 << ".\n";
 
         } catch (int e) {
             // Stores error in int e and then displays error.
@@ -66,13 +69,19 @@ int main()
 double quadPositive(double a, double b, double c) {
     // Calculates positive Quadratic Formula
     // x1 = (-B + (B2 – 4AC)1/2 )  / 2A
-    return 1;
+
+    double x1 = (-b + sqrt((pow(b,2.0)-4.0*a*c)))/2.0*a;
+
+    return x1;
 
 }
 
 double quadNegative(double a, double b, double c) {
     // Calculates negative Quadratic Formula
     // x2 = (-B - (B2 – 4AC)1/2 )  / 2A
-    return 2;
+
+    double x2 = (-b - sqrt((pow(b,2.0)-4.0*a*c)))/2.0*a;
+
+    return x2;
 
 }
