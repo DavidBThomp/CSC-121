@@ -9,6 +9,7 @@
 
 using namespace std;
 
+void failInput();
 double cubeSurfaceArea(double cubeLen);
 double cubeVolume(double cubeLen);
 double sphereSurfaceArea(double sphereRad);
@@ -28,13 +29,11 @@ int main()
 	cout << "1. Cube\n2. Sphere\n3. Rectangular Prism\n4. Cylinder\n5. Cone\n6. Quit\nEnter choice number: ";
 	cin >> menuChoice;
 
-	while (cin.fail()==1) {
-		cout << "\nError! Cannot read input\n";
-		cin.clear();
-		cin.ignore(INT_MAX,'\n');
+    while (cin.fail()==1) { 
+        failInput();
 		cout << "1. Cube\n2. Sphere\n3. Rectangular Prism\n4. Cylinder\n5. Cone\n6. Quit\nEnter choice number: ";
-		cin >> menuChoice;
-	}
+        cin >> menuChoice;
+    }
 
 	while (menuChoice != 6) {
 
@@ -44,10 +43,8 @@ int main()
 			cout << "Enter length of edge in inches:";
         	cin >> cubeLen;
             while (cin.fail()==1) {
-		        cout << "\nError! Cannot read input\n";
-		        cin.clear();
-		        cin.ignore(INT_MAX,'\n');
-		        cout << "Enter length of edge in inches:";
+        		failInput();
+				cout << "Enter length of edge in inches:";
 		        cin >> cubeLen;
 	        }
 			while (cubeLen < 0.0) {
@@ -66,9 +63,7 @@ int main()
 			cout << "Enter radius in inches:";
         	cin >> sphereRad;
             while (cin.fail()==1) {
-		        cout << "\nError! Cannot read input\n";
-		        cin.clear();
-		        cin.ignore(INT_MAX,'\n');
+       			failInput();
 		        cout << "Enter radius in inches:";
 		        cin >> sphereRad;
 	        }
@@ -88,9 +83,7 @@ int main()
 			cout << "Enter Length, Width, and Height in inches:";
         	cin >> rectLen >> rectWid >> rectHei;
             while (cin.fail()==1) {
-		        cout << "\nError! Cannot read input\n";
-		        cin.clear();
-		        cin.ignore(INT_MAX,'\n');
+       			failInput();
 		        cout << "Enter Length, Width, and Height in inches:";
 		        cin >>  rectLen >> rectWid >> rectHei;
 	        }
@@ -110,9 +103,7 @@ int main()
 			cout << "Enter Cylinder Radius and Height in inches:";
         	cin >> cylinderRad >> cylinderHei;
             while (cin.fail()==1) {
-		        cout << "\nError! Cannot read input\n";
-		        cin.clear();
-		        cin.ignore(INT_MAX,'\n');
+       			failInput();
 		        cout << "Enter Cylinder Radius and Height in inches:";
 		        cin >> cylinderRad >> cylinderHei;
 	        }
@@ -132,9 +123,7 @@ int main()
 			cout << "Enter Cone Radius and Height in inches:";
         	cin >> coneRad >> coneHei;
             while (cin.fail()==1) {
-		        cout << "\nError! Cannot read input\n";
-		        cin.clear();
-		        cin.ignore(INT_MAX,'\n');
+       			failInput();
 		        cout << "Enter Cone Radius and Height in inches:";
 		        cin >> coneRad >> coneHei;
 	        }
@@ -157,9 +146,7 @@ int main()
 		cin >> menuChoice;
 
         while (cin.fail()==1) {
-		    cout << "\nError! Cannot read input\n";
-		    cin.clear();
-		    cin.ignore(INT_MAX,'\n');
+       		failInput();
 		    cout << "1. Cube\n2. Sphere\n3. Rectangular Prism\n4. Cylinder\n5. Cone\n6. Quit\nEnter choice number: ";
 		    cin >> menuChoice;
 	    }
@@ -218,4 +205,10 @@ double coneSurfaceArea(double coneRad, double coneHei) {
 double coneVolume(double coneRad, double coneHei) {
     double coneVOL=M_PI*pow(coneRad,2)*(coneHei/3);
     return coneVOL;
+}
+
+void failInput() {
+    cout << "\nError! Cannot read input\n";
+    cin.clear();
+    cin.ignore(INT_MAX,'\n');
 }
