@@ -9,21 +9,41 @@
 */
 
 #include <iostream>
+#include <cmath>
+#include <climits>
 
 using namespace std;
 
 class cube {
     private:
-        double length;
+        double edge;
     public:
-        double cube();
+		bool setEdge(double x);
+		double getEdge();
         double cubeSurfaceArea();
+		double cubeVolume();
 };
 
-double cube::cube {
-    length = 0.0;
+bool cube::setEdge(double x) {
+	bool rv=false;
+	if (x >= 0.0) {
+		edge=x;
+		rv=true;
+	}
+	return rv;
 }
 
+double cube::getEdge() {
+	return edge;
+}
+
+double cube::cubeSurfaceArea() {
+	return 6*pow(edge, 2.0);
+}
+
+double cube::cubeVolume() {
+	return pow(edge, 3.0);
+}
 
 
 
@@ -46,7 +66,7 @@ class cone {
 
 
 
-
+void inputCube(cube& edge);
 void failInput();
 
 int main() {
@@ -68,27 +88,34 @@ int main() {
 
         // Menu choice for cube
 		if (menuChoice==1) {
-		   
+			// Inputs
+		   cube edge;
+		   inputCube(edge);
+
+			// Outputs
+			cout << "The surface area of the cube is " << edge.cubeSurfaceArea() << " inches.\n";
+			cout << "The volume of the cube is " << edge.cubeVolume() << " cubic inches.\n";
+
 		}
 
         // Menu choice for Sphere
 		if (menuChoice==2) {
-		    
+		    ;
 		}
 
         // Menu choice for Rectangular Prism
 		if (menuChoice==3) {
-		   
+		   ;
 		}
 
         // Menu choice for Cylinder
 		if (menuChoice==4) {
-		   
+		   ;
 		}
 
         // Menu choice for Cone
 		if (menuChoice==5) {
-		    
+		    ;
 		}
 
 		if (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 4 && menuChoice != 5 && menuChoice != 6) {
@@ -109,4 +136,19 @@ void failInput() {
     cout << "\nError! Cannot read input\n";
     cin.clear();
     cin.ignore(INT_MAX,'\n');
+}
+
+void inputCube(cube& edge) {
+	double x;
+	cout << "Edge Length: ";
+	cin >> x;
+
+	while (cin.fail()==1) { 
+        failInput();
+		cout << "Edge Length: ";
+		cin >> x;;
+    }
+
+	edge.setEdge(x);
+
 }
