@@ -1,7 +1,7 @@
 
 /*
 * Shapes 2 Assignment
-* User input cannot bbe negative
+* User input cannot be negative
 * Seperate Class for each Shape
 * Dimensions will be members and private
 * Each class will have:
@@ -26,10 +26,8 @@ class cube {
 
 bool cube::setEdge(double x) {
 	bool rv=false;
-	if (x >= 0.0) {
-		edge=x;
-		rv=true;
-	}
+	edge=x;
+	rv=true;
 	return rv;
 }
 
@@ -140,14 +138,19 @@ void failInput() {
 
 void inputCube(cube& edge) {
 	double x;
-	cout << "Edge Length: ";
+	cout << "Edge Length:";
 	cin >> x;
 
 	while (cin.fail()==1) { 
         failInput();
-		cout << "Edge Length: ";
-		cin >> x;;
+		cout << "Edge Length:";
+		cin >> x;
     }
+
+	while (x <= 0.0) {
+		cout << "The edge must be greater than 0.\nEdge Length:";
+		cin >> x;
+	}
 
 	edge.setEdge(x);
 
