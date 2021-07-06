@@ -1,4 +1,3 @@
-
 /*
 * Shapes 2 Assignment
 * User input cannot be negative
