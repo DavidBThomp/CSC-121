@@ -137,8 +137,50 @@ double rectPrism::rectVolume() {
 
 
 class cylinder {
-
+	private:
+		double cylinderRad, cylinderHei;
+	public:
+		bool setCyliRad(double x);
+		bool setCyliHei(double y);
+		double getCyliRad();
+		double getCyliHei();
+		double cyliSurfaceArea();
+		double cyliVolume();
 };
+
+bool cylinder::setCyliRad(double x) {
+	bool rv=false;
+	cylinderRad=x;
+
+	rv=true;
+	return rv;
+}
+
+bool cylinder::setCyliHei(double y) {
+	bool rv=false;
+	cylinderHei=y;
+
+	rv=true;
+	return rv;
+}
+
+double cylinder::getCyliRad() {
+	return cylinderRad;
+}
+
+double cylinder::getCyliHei() {
+	return cylinderHei;
+}
+
+double cylinder::cyliSurfaceArea() {
+	return 2.0*M_PI*cylinderRad*cylinderHei+2.0*M_PI*pow(cylinderRad,2.0);
+}
+
+double cylinder:: cyliVolume() {
+	return M_PI*pow(cylinderRad,2.0)*cylinderHei;
+}
+
+
 
 class cone {
 
@@ -150,6 +192,7 @@ class cone {
 void inputCube(cube& edge);
 void inputSphere(sphere& sphereRad);
 void inputRect(rectPrism& rect);
+void inputCyli(cylinder& cyli);
 void failInput();
 
 int main() {
@@ -193,8 +236,8 @@ int main() {
 
         // Menu choice for Rectangular Prism
 		if (menuChoice==3) {
-		   rectPrism rect;
-		   inputRect(rect);
+			rectPrism rect;
+			inputRect(rect);
 
 			cout << "The surface area of the rectangular prism is " << rect.rectSurfaceArea() << " inches.\n";
 			cout << "The volume of the sphere is " << rect.rectVolume() << " cubic inches.\n";
@@ -202,7 +245,11 @@ int main() {
 
         // Menu choice for Cylinder
 		if (menuChoice==4) {
-		   ;
+			cylinder cyli;
+			inputCyli(cyli);
+
+			cout << "The surface area of the cylinder is " << cyli.cyliSurfaceArea() << " inches.\n";
+			cout << "The volume of the cylinder is " << cyli.cyliVolume() << " cubic inches.\n";
 		}
 
         // Menu choice for Cone
@@ -290,5 +337,26 @@ void inputRect(rectPrism& rect) {
 	rect.setRectLen(x);
 	rect.setRectWid(y);
 	rect.setRectHei(z);
+
+}
+
+void inputCyli(cylinder& cyli) {
+	double x, y;
+	cout << "Enter Cylinder Radius and Height in inches:";
+	cin >> x >> y;
+
+	while (cin.fail()==1) { 
+        failInput();
+		cout << "Enter Cylinder Radius and Height in inches:";
+		cin >> x >> y;
+    }
+
+	while (x <= 0.0) {
+		cout << "The radius and height must be greater than 0.\nEnter Cylinder Radius and Height in inches:";
+		cin >> x >> y;
+	}
+
+	cyli.setCyliRad(x);
+	cyli.setCyliHei(y);
 
 }
