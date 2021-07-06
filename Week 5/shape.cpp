@@ -77,8 +77,64 @@ double sphere::sphereVolume() {
 
 
 class rectPrism {
-
+	private:
+		double rectLen, rectWid, rectHei;
+	public:
+		bool setRectLen(double x);
+		bool setRectWid(double y);
+		bool setRectHei(double z);
+		double getRectLen();
+		double getRectWid();
+		double getRectHei();
+		double rectSurfaceArea();
+		double rectVolume();
 };
+
+bool rectPrism::setRectLen(double x) {
+	bool rv=false;
+	rectLen=x;
+
+	rv=true;
+	return rv;
+}
+
+bool rectPrism::setRectWid(double y) {
+	bool rv=false;
+	rectWid=y;
+
+	rv=true;
+	return rv;
+}
+
+bool rectPrism::setRectHei(double z) {
+	bool rv=false;
+	rectHei=z;
+
+	rv=true;
+	return rv;
+}
+
+double rectPrism::getRectLen() {
+	return rectLen;
+}
+
+double rectPrism::getRectWid() {
+	return rectWid;
+}
+
+double rectPrism::getRectHei() {
+	return rectHei;
+}
+
+double rectPrism::rectSurfaceArea() {
+	return 2*(rectWid*rectLen+rectHei*rectLen+rectHei*rectWid);
+}
+
+double rectPrism::rectVolume() {
+	return rectLen*rectWid*rectHei;
+}
+
+
 
 class cylinder {
 
@@ -93,6 +149,7 @@ class cone {
 
 void inputCube(cube& edge);
 void inputSphere(sphere& sphereRad);
+void inputRect(rectPrism& rect);
 void failInput();
 
 int main() {
@@ -136,7 +193,11 @@ int main() {
 
         // Menu choice for Rectangular Prism
 		if (menuChoice==3) {
-		   ;
+		   rectPrism rect;
+		   inputRect(rect);
+
+			cout << "The surface area of the rectangular prism is " << rect.rectSurfaceArea() << " inches.\n";
+			cout << "The volume of the sphere is " << rect.rectVolume() << " cubic inches.\n";
 		}
 
         // Menu choice for Cylinder
@@ -207,5 +268,27 @@ void inputSphere(sphere& sphereRad) {
 	}
 
 	sphereRad.setRad(x);
+
+}
+
+void inputRect(rectPrism& rect) {
+	double x, y, z;
+	cout << "Rectangle Length, Width, and Height:";
+	cin >> x >> y >> z;
+
+	while (cin.fail()==1) { 
+        failInput();
+		cout << "Rectangle Length, Width, and Height:";
+		cin >> x >> y >> z;
+    }
+
+	while (x <= 0.0) {
+		cout << "The side lengths must be greater than 0.\nRectangle Length, Width, and Height:";
+		cin >> x >> y >> z;
+	}
+
+	rect.setRectLen(x);
+	rect.setRectWid(y);
+	rect.setRectHei(z);
 
 }
