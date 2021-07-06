@@ -183,16 +183,54 @@ double cylinder:: cyliVolume() {
 
 
 class cone {
-
+	private:
+		double coneRad, coneHei;
+	public:
+		bool setConeRad(double x);
+		bool setConeHei(double y);
+		double getConeRad();
+		double getConeHei();
+		double coneSurfaceArea();
+		double coneVolume();
 };
 
+bool cone::setConeRad(double x) {
+	bool rv=false;
+	coneRad=x;
 
+	rv=true;
+	return rv;
+}
 
+bool cone::setConeHei(double y) {
+	bool rv=false;
+	coneHei=y;
+
+	rv=true;
+	return rv;
+}
+
+double cone::getConeRad() {
+	return coneRad;
+}
+
+double cone::getConeHei() {
+	return coneHei;
+}
+
+double cone::coneSurfaceArea() {
+	return M_PI*coneRad*(coneRad+sqrt(pow(coneHei,2)+pow(coneRad,2)));
+}
+
+double cone:: coneVolume() {
+	return M_PI*pow(coneRad,2)*(coneHei/3);
+}
 
 void inputCube(cube& edge);
 void inputSphere(sphere& sphereRad);
 void inputRect(rectPrism& rect);
 void inputCyli(cylinder& cyli);
+void inputCone(cone& cone);
 void failInput();
 
 int main() {
@@ -254,7 +292,11 @@ int main() {
 
         // Menu choice for Cone
 		if (menuChoice==5) {
-		    ;
+			cone cone;
+			inputCone(cone);
+
+			cout << "The surface area of the cone is " << cone.coneSurfaceArea() << " inches.\n";
+			cout << "The volume of the cone is " << cone.coneVolume() << " cubic inches.\n";
 		}
 
 		if (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 4 && menuChoice != 5 && menuChoice != 6) {
@@ -280,17 +322,17 @@ void failInput() {
 // Input for cube
 void inputCube(cube& edge) {
 	double x;
-	cout << "Edge Length:";
+	cout << "Edge Length in Inches:";
 	cin >> x;
 
 	while (cin.fail()==1) { 
         failInput();
-		cout << "Edge Length:";
+		cout << "Edge Length in Inches:";
 		cin >> x;
     }
 
 	while (x <= 0.0) {
-		cout << "The edge must be greater than 0.\nEdge Length:";
+		cout << "The edge must be greater than 0.\nEdge Length in Inches:";
 		cin >> x;
 	}
 
@@ -300,17 +342,17 @@ void inputCube(cube& edge) {
 
 void inputSphere(sphere& sphereRad) {
 	double x;
-	cout << "Sphere Radius:";
+	cout << "Sphere Radius in Inches:";
 	cin >> x;
 
 	while (cin.fail()==1) { 
         failInput();
-		cout << "Sphere Radius:";
+		cout << "Sphere Radius in Inches:";
 		cin >> x;
     }
 
 	while (x <= 0.0) {
-		cout << "The sphere radius must be greater than 0.\nSphere Radius:";
+		cout << "The sphere radius must be greater than 0.\nSphere Radius in Inches:";
 		cin >> x;
 	}
 
@@ -320,17 +362,17 @@ void inputSphere(sphere& sphereRad) {
 
 void inputRect(rectPrism& rect) {
 	double x, y, z;
-	cout << "Rectangle Length, Width, and Height:";
+	cout << "Rectangle Length, Width, and Height in Inches:";
 	cin >> x >> y >> z;
 
 	while (cin.fail()==1) { 
         failInput();
-		cout << "Rectangle Length, Width, and Height:";
+		cout << "Rectangle Length, Width, and Height in Inches:";
 		cin >> x >> y >> z;
     }
 
 	while (x <= 0.0) {
-		cout << "The side lengths must be greater than 0.\nRectangle Length, Width, and Height:";
+		cout << "The side lengths must be greater than 0.\nRectangle Length, Width, and Height in Inches:";
 		cin >> x >> y >> z;
 	}
 
@@ -358,5 +400,26 @@ void inputCyli(cylinder& cyli) {
 
 	cyli.setCyliRad(x);
 	cyli.setCyliHei(y);
+
+}
+
+void inputCone(cone& cone) {
+	double x, y;
+	cout << "Enter Cone Radius and Height in inches:";
+	cin >> x >> y;
+
+	while (cin.fail()==1) { 
+        failInput();
+		cout << "Enter Cone Radius and Height in inches:";
+		cin >> x >> y;
+    }
+
+	while (x <= 0.0) {
+		cout << "The radius and height must be greater than 0.\nEnter Cone Radius and Height in inches:";
+		cin >> x >> y;
+	}
+
+	cone.setConeRad(x);
+	cone.setConeHei(y);
 
 }
