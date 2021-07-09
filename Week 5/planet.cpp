@@ -23,52 +23,97 @@ class planet {
         string planetName;
         double planetMass, planetDiameter;
     public:
+        // Set variables
 		bool setMass(double x);
         bool setDiameter(double y);
+        bool setName(string name);
+
+        // Get variables
 		double getMass();
         double getDiameter();
-        // String getPlanetName
-        // Maybe this works, will have to test.
+        string getName();
+
+        // Calculations and objects for output
         double planetSurfaceArea();
 		double planetVolume();
         double planetDensity();
         double planetAcceleration();
 };
 
-// bool cube::setEdge(double x) {
-// 	bool rv=false;
-// 	edge=x;
-// 	rv=true;
-// 	return rv;
-// }
+bool planet::setMass(double x) {
+    bool rv=false;
+	planetMass=x;
+	rv=true;
+	return rv;
+}
 
-// double cube::getEdge() {
-// 	return edge;
-// }
+bool planet::setDiameter(double y) {
+    bool rv=false;
+	planetDiameter=y;
+	rv=true;
+	return rv;
+}
 
-// double cube::cubeSurfaceArea() {
-// 	return 6*pow(edge, 2.0);
-// }
+bool planet::setName(string name) {
+    bool rv=false;
+	planetName=name;
+	rv=true;
+	return rv;
+}
 
-// double cube::cubeVolume() {
-// 	return pow(edge, 3.0);
-// }
+double planet::getMass() {
+	return planetMass;
+}
+
+double planet::getDiameter() {
+	return planetDiameter;
+}
+
+string planet::getName() {
+	return planetName;
+}
+
+double planet::planetSurfaceArea() {
+	return 4.0*M_PI*pow((planetDiameter/2.0), 2.0);
+}
+
+double planet::planetVolume() {
+	return (4.0/3.0)*M_PI*pow((planetDiameter/2.0), 3.0);
+}
+
+double planet::planetDensity() {
+	return (planetMass/planetVolume());
+}
+
+double planet::planetAcceleration() {
+	return (6.67408*pow(10.0,-11.0)*planetMass/pow((planetDiameter/2.0), 2.0));
+}
 
 void input(planet& planetInfo);
 void failInput();
 
 int main() {
 
+    // bool runAgain = true;
+
     // Input information about planet
+    // while (runAgain = true)
     planet planetInfo;
     input(planetInfo);
 
+    cout << "Name: " << planetInfo.getName() << "\nMass: " << planetInfo.getMass() << "\nDiameter: " << planetInfo.getDiameter() << "\nSurface Area: " << planetInfo.planetSurfaceArea() << "\nVolume: " << planetInfo.planetVolume() << "\nDensity: " << planetInfo.planetDensity() << "\nGravity Acceleration: " << planetInfo.planetAcceleration() << " Units/s." << endl;
+    
     // Output info about planet just input - For now it doesn't have to store info about multiple planets, but if it did use arrays?..
     // cout << The planet name is << planetInfo.name[i] << "for planet selection i.";
     // cout << The planet mass is << planetInfo.mass[i] << " and the diameter is " << planetInfo.diameter[i] << " units.";
     // cout << The planet surface area is << planetInfo.planetSurfaceArea[i] << " units, the mass is " << planetInfo.planetDensity[i] << " units dense, and has an acceleration due to gravity of " << planetInfo.planetAcceleration[i] << " units/second.";
     
+
+
     // Program should loop so that the user is asked it input another planet or fetch another planets info
+
+
+
 	return 0;    
 
 }
@@ -87,9 +132,9 @@ void input(planet& planetInfo) {
     // Need to add error checking for each input, Or combine into single input that goes line by line
     // Look at other code from teacher for example
 
-	cout << "Planet Name:";
-	cin >> name;
-
+    cout << "Planet Name:";     
+    getline(cin, name);
+    
     cout << name << "'s mass:";
     cin >> x;
 
@@ -107,8 +152,8 @@ void input(planet& planetInfo) {
 	// 	cin >> x;
 	// }
 
-    planet.setName(name);
-	planet.setMass(x);
-    planet.setDiameter(y);
+    planetInfo.setName(name);
+	planetInfo.setMass(x);
+    planetInfo.setDiameter(y);
 
 }
