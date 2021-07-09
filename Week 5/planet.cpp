@@ -125,7 +125,7 @@ int main() {
 }
 
 void failInput() {
-    cout << "\nError! Cannot read input\n";
+    cout << "\nError! Cannot read input. Make sure mass and diameter are greater than 0 numbers.\n";
     cin.clear();
     cin.ignore(INT_MAX,'\n');
 }
@@ -141,22 +141,32 @@ void input(planet& planetInfo) {
     cout << "Planet Name:";     
     cin >> name;
     
-    cout << name << "'s mass:";
+    cout << name << "'s mass in KGs:";
     cin >> x;
 
-    cout << name << "'s diameter:";
+    cout << name << "'s diameter in meters:";
     cin >> y;
 
-	// while (cin.fail()==1) { 
-    //     failInput();
-	// 	cout << "Edge Length in Inches:";
-	// 	cin >> x;
-    // }
+    while (cin.fail()==1) { 
+        failInput();
+        // Could make user input into a function, possibly for final project to make code more DRY
+        cout << "Planet Name:";     
+        cin >> name;
+        
+        cout << name << "'s mass in KGs:";
+        cin >> x;
 
-	// while (x <= 0.0) {
-	// 	cout << "The edge must be greater than 0.\nEdge Length in Inches:";
-	// 	cin >> x;
-	// }
+        cout << name << "'s diameter in meters:";
+        cin >> y;
+    }
+
+    while (x <= 0.0 || y <= 0.0) {
+		cout << "The planets radius mass and radiusmust be greater than 0.\n" << name << "'s mass in KGs:";
+		cin >> x;
+
+        cout << name << "'s diameter in meters:";
+        cin >> y;
+	}
 
     planetInfo.setName(name);
 	planetInfo.setMass(x);
