@@ -94,25 +94,31 @@ void failInput();
 
 int main() {
 
-    // bool runAgain = true;
+    bool runAgain = false;
 
-    // Input information about planet
-    // while (runAgain = true)
-    planet planetInfo;
-    input(planetInfo);
+    do {
+        try {
+            planet planetInfo;
+            input(planetInfo);
 
-    cout << "Name: " << planetInfo.getName() << "\nMass: " << planetInfo.getMass() << "\nDiameter: " << planetInfo.getDiameter() << "\nSurface Area: " << planetInfo.planetSurfaceArea() << "\nVolume: " << planetInfo.planetVolume() << "\nDensity: " << planetInfo.planetDensity() << "\nGravity Acceleration: " << planetInfo.planetAcceleration() << " Units/s." << endl;
-    
-    // Output info about planet just input - For now it doesn't have to store info about multiple planets, but if it did use arrays?..
-    // cout << The planet name is << planetInfo.name[i] << "for planet selection i.";
-    // cout << The planet mass is << planetInfo.mass[i] << " and the diameter is " << planetInfo.diameter[i] << " units.";
-    // cout << The planet surface area is << planetInfo.planetSurfaceArea[i] << " units, the mass is " << planetInfo.planetDensity[i] << " units dense, and has an acceleration due to gravity of " << planetInfo.planetAcceleration[i] << " units/second.";
-    
+            cout << "Name: " << planetInfo.getName() << "\nMass: " << planetInfo.getMass() << "\nDiameter: " << planetInfo.getDiameter() << "\nSurface Area: " << planetInfo.planetSurfaceArea() << "\nVolume: " << planetInfo.planetVolume() << "\nDensity: " << planetInfo.planetDensity() << "\nGravity Acceleration: " << planetInfo.planetAcceleration() << " Units/s." << endl;
+        }  catch (int e) {
+            // Stores error in int e and then displays error.
+            runAgain=false;
+            cerr << "An exception was thrown! Error number " << e << endl;
+        }
 
-
-    // Program should loop so that the user is asked it input another planet or fetch another planets info
-
-
+        // Ask user to run program again
+        string userAgain;
+        cout << "Would you like to run the program again?\n (Y)es or (N)o: ";
+        cin >> userAgain;
+        if (userAgain == "Y" || userAgain == "y") {
+            runAgain = false;
+        } else {
+            runAgain = true;
+        }
+        
+    } while (runAgain == false);
 
 	return 0;    
 
@@ -133,7 +139,7 @@ void input(planet& planetInfo) {
     // Look at other code from teacher for example
 
     cout << "Planet Name:";     
-    getline(cin, name);
+    cin >> name;
     
     cout << name << "'s mass:";
     cin >> x;
