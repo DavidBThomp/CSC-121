@@ -101,7 +101,7 @@ int main() {
             planet planetInfo;
             input(planetInfo);
 
-            cout << "Name: " << planetInfo.getName() << "\nMass: " << planetInfo.getMass() << "\nDiameter: " << planetInfo.getDiameter() << "\nSurface Area: " << planetInfo.planetSurfaceArea() << "\nVolume: " << planetInfo.planetVolume() << "\nDensity: " << planetInfo.planetDensity() << "\nGravity Acceleration: " << planetInfo.planetAcceleration() << " Units/s." << endl;
+            cout << "Name: " << planetInfo.getName() << "\nMass: " << planetInfo.getMass() << " KGs\nDiameter: " << planetInfo.getDiameter() << "meters\nSurface Area: " << planetInfo.planetSurfaceArea() << "meters squared\nVolume: " << planetInfo.planetVolume() << "KGs\nDensity: " << planetInfo.planetDensity() << "\nGravity Acceleration: " << planetInfo.planetAcceleration() << " m/s" << endl;
         }  catch (int e) {
             // Stores error in int e and then displays error.
             runAgain=false;
