@@ -77,7 +77,9 @@ void planet::display()
 
 void input(planet& planetInfo);
 void failInput();
+
 void display(vector<planet>& list);
+bool insert(vector<planet>& list, planet planetInfo);
 
 int main() {
 
@@ -108,6 +110,15 @@ int main() {
                 planet planetInfo;
                 input(planetInfo);
 
+
+                int listlen = list.size();
+                // This might not be needed
+                if (listlen < 0) {
+                    list.push_back(planetInfo); 
+                } else {
+                    insert(list, planetInfo);
+                }
+
                 cout << "Name: " << planetInfo.getName() << "\nMass: " << planetInfo.getMass() << " KGs\nDiameter: " << planetInfo.getDiameter() << " meters" << endl;
             } catch (int e) {
                 // Stores error in int e and then displays error.
@@ -133,7 +144,7 @@ int main() {
 
         // Menu choice for listing off planets
 		if (menuChoice==4) {
-            ;
+            display(list);
 
 
 
@@ -208,8 +219,7 @@ void input(planet& planetInfo) {
 }
 
 // Display list of planets
-void display(vector<planet>& list)
-{
+void display(vector<planet>& list) {
    if (list.empty()==1) {
       cout << "List is empty.\n";
    }
@@ -221,4 +231,40 @@ void display(vector<planet>& list)
       }
       cout << endl;
    }
+}
+
+bool insert(vector<planet>& list, planet planetInfo) {
+    int position;
+    cout << "Position in list:";
+    cin >> position;
+
+    while (cin.fail()==1) { 
+        failInput();
+        cout << "Invalid input, please try again\nPosition in list:";     
+        cin >> position;
+    }
+
+    while (position < 0.0) {
+        cout << "Input must be greater than 0.\nPosition in list:";     
+        cin >> position;
+    }
+
+    position = position - 1;
+
+    bool rv=false;
+    if (position >= 0 && position <= list.size()) {
+        rv=true;
+        planet end;
+
+        // add room for the value to be stored
+        list.push_back(end);
+
+        // shift values to the right to make room
+        for (int i = list.size()-1; i >= position ; i--) {
+            list[i]=list[i-1];
+        }
+        list[position] = planetInfo;
+    }
+
+   return rv;
 }
