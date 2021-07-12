@@ -127,8 +127,6 @@ int main() {
                         cout << "\nPlease use a position that is in the list or one above the list.\n\n";
                     }
                 }
-
-
             } catch (int e) {
                 // Stores error in int e and then displays error.
                 cerr << "An exception was thrown! Error number " << e << endl;
@@ -154,16 +152,13 @@ int main() {
         // Menu choice for listing off planets
 		if (menuChoice==4) {
             display(list);
-
-
-
 		}
 
         // Invalid menu choice
 		if (menuChoice != 1 && menuChoice != 2 && menuChoice != 3 && menuChoice != 4 && menuChoice != 5) {
 			cout << "\nError! Invalid menu choice\n";
 		}
-            
+        
 		// print menu
 		cout << "Please select an option or quit program.\n1. Add Planet\n2. Delete Planet\n3. Find Planet\n4. List Planets\n5. Quit\nEnter choice number:";
 		cin >> menuChoice;
@@ -173,7 +168,7 @@ int main() {
     // User selects quit(5) option 
 	cout << "Thanks for using this program.\n";
 
-	return 0;    
+	return 0;
 
 }
 
@@ -203,7 +198,7 @@ void input(planet& planetInfo) {
     while (cin.fail()==1) { 
         failInput();
         // Could make user input into a function, possibly for final project to make code more DRY
-        cout << "Planet Name:";     
+        cout << "Planet Name:";
         cin >> name;
         
         cout << name << "'s mass in KGs:";
