@@ -79,7 +79,7 @@ void input(planet& planetInfo);
 void failInput();
 
 void display(vector<planet>& list);
-bool insert(vector<planet>& list, planet planetInfo);
+bool insert(vector<planet>& list, planet planetInfo, bool rv);
 
 int main() {
 
@@ -95,7 +95,9 @@ int main() {
 
 	// If menu input fails, reprint and reenter number
     while (cin.fail()==1) { 
-        failInput();
+        cout << "\nError! Cannot read input. Make sure input is a number.\n";
+        cin.clear();
+        cin.ignore(INT_MAX,'\n');
 	    cout << "1. Add Planet\n2. Delete Planet\n3. Find Planet\n4. List Planets\n5. Quit\nEnter choice number:";
         cin >> menuChoice;
     }
@@ -110,16 +112,23 @@ int main() {
                 planet planetInfo;
                 input(planetInfo);
 
-
                 int listlen = list.size();
-                // This might not be needed
-                if (listlen < 0) {
+
+                if (listlen <= 0) {
                     list.push_back(planetInfo); 
+                    cout << "Name: " << planetInfo.getName() << "\nMass: " << planetInfo.getMass() << " KGs\nDiameter: " << planetInfo.getDiameter() << " meters" << endl;
                 } else {
-                    insert(list, planetInfo);
+                    bool rv;
+                    rv = insert(list, planetInfo, rv);
+
+                    if (rv == true) {
+                        cout << "Name: " << planetInfo.getName() << "\nMass: " << planetInfo.getMass() << " KGs\nDiameter: " << planetInfo.getDiameter() << " meters" << endl;
+                    } else {
+                        cout << "\nPlease use a position that is in the list or one above the list.\n\n";
+                    }
                 }
 
-                cout << "Name: " << planetInfo.getName() << "\nMass: " << planetInfo.getMass() << " KGs\nDiameter: " << planetInfo.getDiameter() << " meters" << endl;
+
             } catch (int e) {
                 // Stores error in int e and then displays error.
                 cerr << "An exception was thrown! Error number " << e << endl;
@@ -233,7 +242,7 @@ void display(vector<planet>& list) {
    }
 }
 
-bool insert(vector<planet>& list, planet planetInfo) {
+bool insert(vector<planet>& list, planet planetInfo, bool rv) {
     int position;
     cout << "Position in list:";
     cin >> position;
@@ -251,9 +260,9 @@ bool insert(vector<planet>& list, planet planetInfo) {
 
     position = position - 1;
 
-    bool rv=false;
+    rv = false;
     if (position >= 0 && position <= list.size()) {
-        rv=true;
+        rv = true;
         planet end;
 
         // add room for the value to be stored
@@ -264,6 +273,8 @@ bool insert(vector<planet>& list, planet planetInfo) {
             list[i]=list[i-1];
         }
         list[position] = planetInfo;
+    } else {
+        rv = false;
     }
 
    return rv;
