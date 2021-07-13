@@ -80,6 +80,7 @@ void failInput();
 
 void display(vector<planet>& list);
 bool insert(vector<planet>& list, planet planetInfo, bool rv);
+void remove(vector<planet>& list);
 
 int main() {
 
@@ -136,9 +137,7 @@ int main() {
 
         // Menu choice for deleting planet
 		if (menuChoice==2) {
-            ;
-
-
+            remove(list);
 		}
 
         // Menu choice for finding planets by name
@@ -273,4 +272,33 @@ bool insert(vector<planet>& list, planet planetInfo, bool rv) {
     }
 
    return rv;
+}
+
+void remove(vector<planet>& list) {
+    int position;
+    display(list);
+    cout << "Position in list to remove:";
+    cin >> position;
+
+    while (cin.fail()==1) { 
+        failInput();
+        cout << "Invalid input, please try again\nPosition in list:";     
+        cin >> position;
+    }
+
+    while (position < 0.0) {
+        cout << "Input must be greater than 0.\nPosition in list:";     
+        cin >> position;
+    }
+
+    position = position - 1;
+    if (position >= 0 and position < list.size()) {
+      // shift values to left, overwriting value to be deleted
+      for (int i = position; i < list.size() - 1; i++) {
+         list[i]=list[i+1];
+      }
+      //remove last element in the list
+      list.pop_back();
+    }
+
 }
