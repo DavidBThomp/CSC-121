@@ -37,6 +37,12 @@ class planet {
         // Vector functions
         void display();
         string findName(vector<string>& nameVector);
+
+        // Calculations and objects for output
+        double planetSurfaceArea();
+		double planetVolume();
+        double planetDensity();
+        double planetAcceleration();
 };
 
 bool planet::setMass(double x) {
@@ -73,11 +79,27 @@ string planet::getName() {
 }
 
 void planet::display() {
-    cout << "Name: " << planetName << "   Mass: " << planetMass << " KGs    Diameter: " << planetDiameter << " meters" << endl;
+    cout << "Name: " << planetName << "     Mass: " << planetMass << " KGs     Diameter: " << planetDiameter << " meters     Surface Area: " << planetSurfaceArea() << "meters squared     Volume: " << planetVolume() << "KGs     Density: " << planetDensity() << "KGs/cubic meter      Gravity Acceleration: " << planetAcceleration() << " m/s" << endl;
 }
 
 string planet::findName(vector<string>& nameVector) {
     return planetName;
+}
+
+double planet::planetSurfaceArea() {
+	return 4.0*M_PI*pow((planetDiameter/2.0), 2.0);
+}
+
+double planet::planetVolume() {
+	return (4.0/3.0)*M_PI*pow((planetDiameter/2.0), 3.0);
+}
+
+double planet::planetDensity() {
+	return (planetMass/planetVolume());
+}
+
+double planet::planetAcceleration() {
+	return (6.67408*pow(10.0,-11.0)*planetMass/pow((planetDiameter/2.0), 2.0));
 }
 
 
