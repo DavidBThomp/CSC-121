@@ -165,8 +165,17 @@ int main() {
 		}
         
 		// print menu
-		cout << "Please select an option or quit program.\n1. Add Planet\n2. Delete Planet\n3. Find Planet\n4. List Planets\n5. Quit\nEnter choice number:";
+		cout << "\nPlease select an option or quit program.\n1. Add Planet\n2. Delete Planet\n3. Find Planet\n4. List Planets\n5. Quit\nEnter choice number:";
 		cin >> menuChoice;
+        	// If menu input fails, reprint and reenter number
+        while (cin.fail()==1) { 
+            cout << "\nError! Cannot read input. Make sure input is a number.\n";
+            cin.clear();
+            cin.ignore(INT_MAX,'\n');
+            cout << "\nPlease select an option or quit program.\n1. Add Planet\n2. Delete Planet\n3. Find Planet\n4. List Planets\n5. Quit\nEnter choice number:";
+            cin >> menuChoice;
+        }
+
 
 	}
 
@@ -179,7 +188,7 @@ int main() {
 
 
 void failInput() {
-    cout << "\nError! Cannot read input. Make sure mass and diameter are greater than 0 numbers.\n";
+    cout << "\nError! Cannot read input. Mass and diameter must be greater than 0\n";
     cin.clear();
     cin.ignore(INT_MAX,'\n');
 }
@@ -192,7 +201,7 @@ void input(planet& planetInfo) {
     // Need to add error checking for each input, Or combine into single input that goes line by line
     // Look at other code from teacher for example
 
-    cout << "Planet Name:";     
+    cout << "\nPlanet Name:";     
     cin >> name;
     
     cout << name << "'s mass in KGs:";
@@ -230,17 +239,17 @@ void input(planet& planetInfo) {
 
 // Display list of planets
 void display(vector<planet>& list) {
-   if (list.empty()==1) {
-      cout << "List is empty.\n";
-   }
-   else {
-      long len=list.size();
-      for (long i=0;i<len;i++)
-      {
-              list[i].display();
-      }
-      cout << endl;
-   }
+    if (list.empty()==1) {
+        cout << "List is empty.\n";
+    }
+    else {
+        long len=list.size();
+        for (long i=0;i<len;i++) {
+            cout << i + 1 << ") ";
+            list[i].display();
+        }
+        cout << endl;
+    }
 }
 
 bool insert(vector<planet>& list, planet planetInfo, bool rv) {
@@ -256,7 +265,7 @@ bool insert(vector<planet>& list, planet planetInfo, bool rv) {
         // add room for the value to be stored
         list.push_back(end);
 
-        // shift values to the right to make room
+        // shift values down to make room
         for (int i = list.size()-1; i >= position ; i--) {
             list[i]=list[i-1];
         }
@@ -286,7 +295,7 @@ void remove(vector<planet>& list) {
 
 int getPosition() {
     int position;
-    cout << "Position in list to remove:";
+    cout << "Position in list to insert:";
     cin >> position;
 
     while (cin.fail()==1) { 
