@@ -11,6 +11,7 @@
 */
 
 #include <iostream>
+#include <algorithm>
 #include <cmath>
 #include <climits>
 #include <string>
@@ -35,6 +36,7 @@ class planet {
 
         // Vector functions
         void display();
+        string findName(vector<string>& nameVector);
 };
 
 bool planet::setMass(double x) {
@@ -70,10 +72,14 @@ string planet::getName() {
 	return planetName;
 }
 
-void planet::display()
-{
+void planet::display() {
     cout << "Name: " << planetName << "   Mass: " << planetMass << " KGs    Diameter: " << planetDiameter << " meters" << endl;
 }
+
+string planet::findName(vector<string>& nameVector) {
+    return planetName;
+}
+
 
 void input(planet& planetInfo);
 
@@ -83,12 +89,14 @@ void failInput();
 void display(vector<planet>& list);
 bool insert(vector<planet>& list, planet planetInfo, bool rv);
 void remove(vector<planet>& list);
+void findPlanet(vector<planet>& list);
+
 
 int main() {
 
+    planet planetInfo;
     vector<planet> list;
     display(list);
-
 
     int menuChoice=0;
 
@@ -112,7 +120,6 @@ int main() {
 		if (menuChoice==1) {
 
             try {
-                planet planetInfo;
                 input(planetInfo);
 
                 int listlen = list.size();
@@ -144,10 +151,7 @@ int main() {
 
         // Menu choice for finding planets by name
 		if (menuChoice==3) {
-            ;
-
-
-
+            findPlanet(list);
 		}
 
         // Menu choice for listing off planets
@@ -172,6 +176,7 @@ int main() {
 	return 0;
 
 }
+
 
 void failInput() {
     cout << "\nError! Cannot read input. Make sure mass and diameter are greater than 0 numbers.\n";
@@ -296,4 +301,36 @@ int getPosition() {
     }
 
     return position;
+}
+
+void findPlanet(vector<planet>& list) {
+    // PLanet to find
+    string planetFind;
+    cout << "Planet name to find:";
+    cin >> planetFind;
+
+    // Vector with planets as string
+    vector<string>nameVector;
+    string planetName;
+    long len=list.size();
+    for (long i=0;i<len;i++) {
+        planetName = list[i].findName(nameVector);
+        nameVector.push_back(planetName);
+    }
+
+    // find index of planet to find
+    int index;
+    auto it = find(nameVector.begin(),nameVector.end(), planetFind);
+    if (it != nameVector.end()) {
+        index = it - nameVector.begin();
+
+        // Display the list information for that planet list value
+        list[index].display();
+
+    } else {
+
+        cout << "Planet cannot be found.\n";
+        
+    }
+
 }
