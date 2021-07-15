@@ -108,8 +108,6 @@ void remove(vector<planet>& list);
 void findPlanet(vector<planet>& list);
 
 //Ordering Functions
-// bool pass(vector<string>& nameVector, long len);
-// void swap(string& x, string& y);
 void order(vector<planet>& list);
 
 
@@ -392,6 +390,7 @@ void order(vector<planet>& list) {
         for	(long i=0; i<len - 1; i++) {
             // Simplified Bubble Sorting
             // Credit to http://www.cplusplus.com/forum/general/24208/
+            // To sort planets by full data replace with list
             if (nameVector[i] > nameVector[i + 1]) {
                 nameVector[i].swap(nameVector[i + 1]);
                 done = true;
