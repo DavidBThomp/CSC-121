@@ -1,5 +1,8 @@
 /*
 * List the planets in order
+* TO DO
+* Allow user to input any number greater than vector to be put in last
+* Option 6
 */
 
 #include <iostream>
@@ -73,7 +76,7 @@ string planet::getName() {
 }
 
 void planet::display() {
-    cout << "Name: " << planetName << "     Mass: " << planetMass << " KGs     Diameter: " << planetDiameter << " meters     Surface Area: " << planetSurfaceArea() << "meters squared     Volume: " << planetVolume() << "KGs     Density: " << planetDensity() << "KGs/cubic meter      Gravity Acceleration: " << planetAcceleration() << " m/s" << endl;
+    cout << "Name: " << planetName << "     Mass: " << planetMass << " KGs     Diameter: " << planetDiameter << " meters     Surface Area: " << planetSurfaceArea() << " meters squared     Volume: " << planetVolume() << "KGs     Density: " << planetDensity() << "KGs/cubic meter      Gravity Acceleration: " << planetAcceleration() << " m/s" << endl;
 }
 
 string planet::findName(vector<string>& nameVector) {
@@ -393,15 +396,12 @@ void order(vector<planet>& list) {
             // To sort planets by full data replace with list
             if (nameVector[i] > nameVector[i + 1]) {
                 nameVector[i].swap(nameVector[i + 1]);
+                iter_swap(list.begin() + i, list.begin() + i + 1);
                 done = true;
             }
         }
     }
-
-    for (size_t i=0;  i <nameVector.size();  i++) {
-        cout<< nameVector[i] << endl;
-    }
-    cout << endl;
+    display(list);
 
     nameVector.clear();
 }
