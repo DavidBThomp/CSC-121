@@ -124,12 +124,36 @@ void findPlanet(vector<planet>& list);
 //Ordering Functions
 void order(vector<planet>& list);
 
-
+void inputFile(planet& planetInfo, string name, double mass, double diameter);
 
 int main() {
 
     planet planetInfo;
     vector<planet> list;
+
+
+    string info;
+    ifstream myfile("file.txt");
+    try {
+    if (myfile.is_open()) {
+        while(getline(myfile, info)) {
+            string name = info;
+            double mass = stod(info);
+            double diameter = stod(info);
+            inputFile(planetInfo, name, mass, diameter);
+            list.push_back(planetInfo); 
+        }
+    myfile.close();
+    } else {
+        cout << "Unable to open file";
+    }
+    } catch (int e) {
+        cout << "Failure:" << e;
+    }
+
+
+
+
 
     display(list);
 
@@ -220,9 +244,9 @@ int main() {
 
 
     // Add new planets to file
-    ofstream myfile("file.txt");
+    ofstream thefile("file.txt");
     for(int i = 0; i < list.size(); i++) {
-        myfile << list[i].getName() << endl << list[i].getMass () << endl << list[i].getDiameter() << endl;
+        thefile << list[i].getName() << endl << list[i].getMass () << endl << list[i].getDiameter() << endl;
     }
 
     // User selects quit(6) option 
@@ -280,6 +304,15 @@ void input(planet& planetInfo) {
     planetInfo.setName(name);
 	planetInfo.setMass(x);
     planetInfo.setDiameter(y);
+
+}
+
+// Input for planet from file
+void inputFile(planet& planetInfo, string name, double mass, double diameter) {
+
+    planetInfo.setName(name);
+	planetInfo.setMass(mass);
+    planetInfo.setDiameter(diameter);
 
 }
 
