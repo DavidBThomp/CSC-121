@@ -1,8 +1,6 @@
 /*
-* List the planets in order
 * TO DO
 * Allow user to input any number greater than vector to be put in last
-* Option 6
 */
 
 #include <iostream>
