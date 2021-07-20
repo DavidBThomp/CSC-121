@@ -133,20 +133,22 @@ int main() {
 
 
     string info;
+    double m, d;
     ifstream myfile("file.txt");
     try {
-    if (myfile.is_open()) {
-        while(getline(myfile, info)) {
-            string name = info;
-            double mass = stod(info);
-            double diameter = stod(info);
-            inputFile(planetInfo, name, mass, diameter);
-            list.push_back(planetInfo); 
+        if (myfile.is_open()) {
+            while (myfile >> info >> m >> d){
+                string name = info;
+                double mass = m;
+                double diameter = d;
+
+                inputFile(planetInfo, name, mass, diameter);
+                list.push_back(planetInfo); 
+            }
+            myfile.close();
+        } else {
+            cout << "Unable to open file";
         }
-    myfile.close();
-    } else {
-        cout << "Unable to open file";
-    }
     } catch (int e) {
         cout << "Failure:" << e;
     }
