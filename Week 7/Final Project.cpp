@@ -1,6 +1,5 @@
 /*
-* TO DO
-* Allow user to input any number greater than vector to be put in last
+* Makes a vector of planets which can be sorted, found, input, removed, and stored
 */
 
 #include <iostream>
@@ -334,9 +333,14 @@ void display(vector<planet>& list) {
 bool insert(vector<planet>& list, planet planetInfo, bool rv) {
     int position = getPosition();
 
+    if (position > list.size()) {
+        position = list.size() + 1;
+    }
+
     position = position - 1;
 
     rv = false;
+
     if (position >= 0 && position <= list.size()) {
         rv = true;
         planet end;
