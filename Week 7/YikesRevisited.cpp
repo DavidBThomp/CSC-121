@@ -79,6 +79,8 @@ void maths(double velocity, double angle, string fileName) {
 	// Processing and output for x,y cordinates
 	double timerSpace = timeAir/20.0;
 	double incTime = 0.0;
+	cout << "\nYikes Velocity is " << velocity << " MPH" << endl;
+	cout << "Yikes angle of launch is " << angle << " Degrees" << endl;
 	while (incTime < timeAir)
 	{
 		double xCord=(feetps * cos(angles)) * incTime;
@@ -89,7 +91,7 @@ void maths(double velocity, double angle, string fileName) {
 	
 	// output
 
-	cout << "Yikes will land " << distance << " feet from the cannon\nHe will spend " << timeAir << " seconds the air.\nHis maximum height wil be " << maxHeight << " feet.\n";
+	cout << "Yikes will land " << distance << " feet from the cannon\nHe will spend " << timeAir << " seconds the air.\nHis maximum height wil be " << maxHeight << " feet.\n" << endl;;
 
 	// Expected output for 100MPH 30 Deg:
 	// Distance = 578.815~       Height = 83.545~    Time = 4.56~   
@@ -110,8 +112,6 @@ void maths(double velocity, double angle, string fileName) {
 		}
 	}
 	output.close();
-
-
 
 }
 
