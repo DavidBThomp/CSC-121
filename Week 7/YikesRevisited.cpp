@@ -3,10 +3,15 @@
 * Take input in MPH and angle in degrees and calculates landing
 */
 
+
+// Make is so program doesnt loop infinitely
+// Don't close program after making new file
+
 #include <iostream>
 #include <cmath>
 #include <string>
 #include <fstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -16,7 +21,7 @@ void inputs(string fileName);
 int main() {
 
 	// File Opening
-	string fileName;
+	string fileName, x;
 	cout << "Please input file name you would like to work with:";
 	cin >> fileName;
 
@@ -24,15 +29,14 @@ int main() {
 
 	double v, a;
 	char appendDelete;
+	bool runAgain;
+	runAgain = true;
 
 	try {
         if (myfile.is_open()) {
 
-			while (myfile >> v >> a){
-                double velocity = v;
-                double angle = a;
-
-				maths(velocity, angle, fileName);
+			while (myfile >> v >> a) {
+				;
             }
             myfile.close();
 
@@ -40,13 +44,22 @@ int main() {
 			cout << "Would you like to (d)elete the file and start fresh, or (a)ppend and add the file:";
 			cin >> appendDelete;
 
+
 			if (appendDelete == 'd' || appendDelete == 'D') {
 				ofstream deleteFile;
 				deleteFile.open(fileName, ios::out);
 				deleteFile.close();
-				inputs(fileName);
+
+				while (runAgain == true) {
+					inputs(fileName);
+				}
+
 			} else if (appendDelete == 'a' || appendDelete == 'A') {
-				inputs(fileName);
+
+				while (runAgain == true) {
+					inputs(fileName);
+				}
+
 			} else {
 				cout << "Please use a valid input, either 'A' or 'D'." << endl;
 			}
@@ -60,8 +73,8 @@ int main() {
         cout << "Failure:" << e;
     }
 
-	return 0;
 
+	return 0;
 }
 
 void maths(double velocity, double angle, string fileName) {
@@ -79,8 +92,8 @@ void maths(double velocity, double angle, string fileName) {
 	// Processing and output for x,y cordinates
 	double timerSpace = timeAir/20.0;
 	double incTime = 0.0;
-	cout << "\nYikes Velocity is " << velocity << " MPH" << endl;
-	cout << "Yikes angle of launch is " << angle << " Degrees" << endl;
+	cout << "\nYikes velocity is " << velocity << " MPH" << endl;
+	cout << "Yikes angle of launch is " << angle << " degrees" << endl;
 	while (incTime < timeAir)
 	{
 		double xCord=(feetps * cos(angles)) * incTime;
@@ -102,6 +115,7 @@ void maths(double velocity, double angle, string fileName) {
 
 	if (output.is_open()==1) {
 	output.setf(ios::fixed | ios::right);
+	output << setprecision(3);
 	output << velocity << endl;
 	output << angle << endl;
 	output << "Yikes will land " << distance << " feet from the cannon." << endl;
@@ -112,6 +126,8 @@ void maths(double velocity, double angle, string fileName) {
 		}
 	}
 	output.close();
+
+	
 
 }
 
