@@ -3,18 +3,21 @@
 * Take input in MPH and angle in degrees and calculates landing
 */
 
-// Don't close program after making new file
+// Error Checking
+
 
 #include <iostream>
 #include <cmath>
 #include <string>
 #include <fstream>
 #include <iomanip>
+#include <climits>
 
 using namespace std;
 
 void maths(double velocity, double angle, string fileName);
 void inputs(string fileName);
+void failInput();
 
 int main() {
 
@@ -22,6 +25,12 @@ int main() {
 	string fileName, x;
 	cout << "Please input file name you would like to work with:";
 	cin >> fileName;
+
+	while (cin.fail()==1) { 
+		failInput();
+		cout << "Please input file name you would like to work with:";
+		cin >> fileName;
+	}
 
 	ifstream myfile(fileName);
 
@@ -41,7 +50,11 @@ int main() {
 
 			cout << "Would you like to (d)elete the file and start fresh, or (a)ppend and add the file:";
 			cin >> appendDelete;
-
+			while (cin.fail()==1) { 
+				failInput();
+				cout << "Would you like to (d)elete the file and start fresh, or (a)ppend and add the file:";
+				cin >> appendDelete;
+			}
 
 			if (appendDelete == 'd' || appendDelete == 'D') {
 				ofstream deleteFile;
@@ -83,7 +96,14 @@ int main() {
         } else {
             cout << "Unable to find file." << endl << "Please enter a file name for data:";
 			cin >> fileName;
+
+			while (cin.fail()==1) { 
+				failInput();
+				cout << "Unable to find file." << endl << "Please enter a file name for data:";
+				cin >> fileName;
+			}
 			ofstream thefile(fileName);
+			cout << "Run program again and use new file name." << endl;
         }
     } catch (int e) {
         cout << "Failure:" << e;
@@ -156,6 +176,13 @@ void inputs(string fileName) {
 	cout << "Enter his velocity (Miles Per Hour) and angle (degrees):";
 	cin >> velocity >> angle;
 
+	while (cin.fail()==1) { 
+		failInput();
+		cout << "Yikers the clown is being shot out a cannon, help him determine where he lands!\n";
+		cout << "Enter his velocity (Miles Per Hour) and angle (degrees):";
+		cin >> velocity >> angle;
+	}
+
 	if (velocity < 0) {
 		cout << "The velocity must be greater than 0 miles per hour.\n";
 	} else if (angle < 0 || angle > 90) {
@@ -163,5 +190,20 @@ void inputs(string fileName) {
 	} else {
 		maths(velocity, angle, fileName);
 	}
+
+}
+
+void failInput() {
+	// while (cin.fail()==1) { 
+	// 	cout << "\nError! Cannot read input.\n";
+	// 	cin.clear();
+	// 	cin.ignore(INT_MAX,'\n');
+	// 	cout << "1. Add Planet\n2. Delete Planet\n3. Find Planet\n4. List Planets\n5. Order Planets\n6. Quit\nEnter choice number:";
+	// 	cin >> menuChoice;
+	// }
+
+    cout << "\nError! Cannot read input.\n";
+    cin.clear();
+    cin.ignore(INT_MAX,'\n');
 
 }
