@@ -3,8 +3,6 @@
 * Take input in MPH and angle in degrees and calculates landing
 */
 
-
-// Make is so program doesnt loop infinitely
 // Don't close program after making new file
 
 #include <iostream>
@@ -28,7 +26,7 @@ int main() {
 	ifstream myfile(fileName);
 
 	double v, a;
-	char appendDelete;
+	char appendDelete, test;
 	bool runAgain;
 	runAgain = true;
 
@@ -52,12 +50,30 @@ int main() {
 
 				while (runAgain == true) {
 					inputs(fileName);
+
+
+					cout << "Run program again? (Y)es or (N)o:";
+					cin >> test;
+					if (test == 'y' || test == 'Y') {
+						runAgain = true;
+					} else {
+						runAgain = false;
+					}
+
 				}
 
 			} else if (appendDelete == 'a' || appendDelete == 'A') {
 
 				while (runAgain == true) {
 					inputs(fileName);
+
+					cout << "Run program again? (Y)es or (N)o:";
+					cin >> test;
+					if (test == 'y' || test == 'Y') {
+						runAgain = true;
+					} else {
+						runAgain = false;
+					}
 				}
 
 			} else {
