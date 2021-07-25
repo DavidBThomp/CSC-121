@@ -34,7 +34,9 @@ int main()
             }
             myfile.close();
         } else {
-            cout << "Unable to find file." << endl;
+            cout << "Unable to find file." << endl << "Please enter a file name for data:";
+			cin >> fileName;
+			ofstream thefile(fileName);
         }
     } catch (int e) {
         cout << "Failure:" << e;
@@ -57,7 +59,6 @@ int main()
 		cout << "The angle must be between 0 and 90 degrees.\n";
 	} else {
 		maths(velocity, angle);
-
 	}
 	return 0;
 
