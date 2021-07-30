@@ -1,5 +1,6 @@
 /*
 * Converts C to F
+* Stores inputs into file, and allows for file to be read if created by user
 */
 
 #include <iostream>
@@ -57,8 +58,6 @@ int main()
             appendDelete(fileName);
 
         } else {
-
-            // Move this into a function that will loop back and run program
             cout << "Unable to find file." << endl << "Please enter a file name for data:";
 			cin >> fileName;
 
@@ -69,7 +68,6 @@ int main()
 			}
 			ofstream thefile(fileName);
             cout << "File created!" << endl;
-
         }
 
     } catch (int e) {
@@ -104,7 +102,6 @@ int main()
 void appendDelete(string fileName) {
     char appendDelete;
 
-    // Move all this into a function
     cout << "Would you like to (d)elete the file and start fresh, or (a)ppend and add the file:";
     cin >> appendDelete;
     while (cin.fail()==1) { 
@@ -113,7 +110,6 @@ void appendDelete(string fileName) {
         cin >> appendDelete;
     }
     
-    // Possibly have to make this loop on failure?
     if (appendDelete == 'd' || appendDelete == 'D') {
         ofstream deleteFile;
         deleteFile.open(fileName, ios::out);
@@ -194,22 +190,12 @@ int farToCel(string fileName) {
 }
 
 void failInput() {
-	// while (cin.fail()==1) { 
-	// 	cout << "\nError! Cannot read input.\n";
-	// 	cin.clear();
-	// 	cin.ignore(INT_MAX,'\n');
-	// 	cout << "1. Add Planet\n2. Delete Planet\n3. Find Planet\n4. List Planets\n5. Order Planets\n6. Quit\nEnter choice number:";
-	// 	cin >> menuChoice;
-	// }
-
     cout << "\nError! Cannot read input.\n";
     cin.clear();
     cin.ignore(INT_MAX,'\n');
-
 }
 
 void inputFile(string fileName, double temp, char unit) {
-        // Output will look similar to this, so even if deleted it will add on.
         ofstream output;
         output.open(fileName, ios::app);
 
