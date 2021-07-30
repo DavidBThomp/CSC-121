@@ -12,7 +12,10 @@
 using namespace std;
 
 int celToFar(string fileName);
+void celToFarFile(double fileTemp);
 int farToCel(string fileName);
+void farToCelFile(double fileTemp);
+
 void failInput();
 void appendDelete(string fileName);
 void inputFile(string fileName, double temp, char unit);
@@ -20,7 +23,7 @@ void inputFile(string fileName, double temp, char unit);
 int main()
 {
     int menuChoice = 0;
-    double celConvert, farConvert, fileInput;
+    double celConvert, farConvert, fileInput, fileTemp;
     char celOrFar;
 
 	// File Opening
@@ -39,10 +42,14 @@ int main()
     try{
         if (myfile.is_open()) {
             // While file is open, take inputs seperated by space
-            while(myfile >> fileInput >> celOrFar) {
-                ;
-                // Make a way to read input
-                // Possibly use new line to break up inputs...
+            while(myfile >> fileTemp >> celOrFar) {
+                if (celOrFar == 'C' && fileTemp) {
+                    celToFarFile(fileTemp);
+                } else if (celOrFar == 'F' && fileTemp) {
+                    farToCelFile(fileTemp);
+                } else if (celOrFar != 'F' || celOrFar !='C' || !fileTemp) {
+                    cout << "This line has incorrect formatted units. Please format units and try again.\n";
+                }
             }
             myfile.close();
         
@@ -50,6 +57,7 @@ int main()
             appendDelete(fileName);
 
         } else {
+
             // Move this into a function that will loop back and run program
             cout << "Unable to find file." << endl << "Please enter a file name for data:";
 			cin >> fileName;
@@ -61,6 +69,7 @@ int main()
 			}
 			ofstream thefile(fileName);
             cout << "File created!" << endl;
+
         }
 
     } catch (int e) {
@@ -76,16 +85,10 @@ int main()
     while (menuChoice != 3) {
         if (menuChoice == 1) {
             farConvert = celToFar(fileName);
-            temp = farConvert;
-            unit = 'F';
-            inputFile(fileName, temp, unit);
         }
 
         if (menuChoice == 2) {
             celConvert = farToCel(fileName);
-            temp = celConvert;
-            unit = 'C';
-            inputFile(fileName, temp, unit);
         }
 
         cout << "Please select another option or quit.\n1. Celsius\n2. Farenheit\n3. Quit\nWhich would you like to convert from:";
@@ -93,7 +96,7 @@ int main()
 
     }
 
-    cout << "Thank you for using the program! Data is store in a file for all conversions done!" << endl;
+    cout << "Thank you for using the program! Data is stored in the file for all conversions done!" << endl;
 
 	return 0;
 }
@@ -126,7 +129,7 @@ void appendDelete(string fileName) {
 
 int celToFar(string fileName) {
     // variables
-	double cel=0.0, far=0.0;
+    double far, cel;
 
     try {
 
@@ -219,4 +222,45 @@ void inputFile(string fileName, double temp, char unit) {
             }
         }
         output.close();
+}
+
+void celToFarFile(double fileTemp) {
+    double far;
+    cout << "The tempeture from file is " << fileTemp << " °C." << endl;
+    try {
+        if (fileTemp < 0.0) {
+            throw 1;
+        } else if (fileTemp > 100.0) {
+            throw 2;
+        } else {
+            // processing
+            far = (fileTemp*9.0/5.0) + 32.0;
+
+            // output
+            cout << "The temperature in farenheit is " << far << "°F\n";
+        }  
+    } catch (int e) {
+        cout << "An exception occured, Exception Number:" << e << endl;
+    }
+}
+
+void farToCelFile(double fileTemp) {
+    double cel;
+    cout << "The tempeture from file is " << fileTemp << " °F." << endl;
+    try {
+        if (fileTemp < 0.0) {
+            throw 1;
+        } else if (fileTemp > 100.0) {
+            throw 2;
+        } else {
+            // processing
+            cel = (fileTemp-32.0)/1.8;
+
+            // output
+            cout << "The temperature in celsius is " << cel << "°C\n";
+        }
+
+    } catch (int e) {
+        cout << "An exception occured, Exception Number:" << e << endl;
+    }
 }
